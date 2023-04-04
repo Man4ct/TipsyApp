@@ -11,28 +11,6 @@ import UIKit
 class calculatorViewController: UIViewController {
     var tip = 0.10
 
-    @IBAction func tipChanged(_ sender: UIButton) {
-        zeroPctButton.isSelected = false
-        tenPctButton.isSelected = false
-        twentyPctButton.isSelected = false
-        
-        sender.isSelected = true
-
-               //Get the current title of the button that was pressed.
-               let buttonTitle = sender.currentTitle!
-               
-               //Remove the last character (%) from the title then turn it back into a String.
-               let buttonTitleMinusPercentSign =  String(buttonTitle.dropLast())
-               
-               //Turn the String into a Double.
-               let buttonTitleAsANumber = Double(buttonTitleMinusPercentSign)!
-               
-               //Divide the percent expressed out of 100 into a decimal e.g. 10 becomes 0.1
-               tip = buttonTitleAsANumber / 100
-        
-
-        
-    }
     
     @IBOutlet weak var zeroPctButton: UIButton!
     
@@ -40,13 +18,36 @@ class calculatorViewController: UIViewController {
     
     @IBOutlet weak var twentyPctButton: UIButton!
     
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    @IBOutlet weak var splitTextLabel: UILabel!
+    
+    @IBAction func calculatePressed(_ sender: UIButton) {
+        print(tip)
     }
+    
 
+    @IBAction func stepperValueChanged(_ sender: UIStepper) {
+        
+        splitTextLabel.text = String(Int(sender.value))
+    }
+    
+    
+    
+    
+    @IBAction func tipChanged(_ sender: UIButton) {
+        zeroPctButton.isSelected = false
+        tenPctButton.isSelected = false
+        twentyPctButton.isSelected = false
+        
+        sender.isSelected = true
 
+               let buttonTitle = sender.currentTitle!
+               
+               let buttonTitleMinusPercentSign =  String(buttonTitle.dropLast())
+               
+               let buttonTitleAsANumber = Double(buttonTitleMinusPercentSign)!
+         
+               tip = buttonTitleAsANumber / 100
+        
+    }
 }
 
-//test
