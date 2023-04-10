@@ -199,6 +199,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="billTextField" destination="wcN-ka-Q4F" id="yRD-kc-1NK"/>
                         <outlet property="splitTextLabel" destination="bSy-Yc-886" id="D4Z-jW-3xM"/>
                         <outlet property="tenPctButton" destination="7y6-Kf-yF0" id="eiC-fx-7cZ"/>
                         <outlet property="twentyPctButton" destination="UtR-dU-EKt" id="sEI-Sg-US0"/>
