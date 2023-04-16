@@ -3,21 +3,32 @@
 //  Tipsy
 //
 //  Created by Fahmi Fahreza on 04/04/23.
-//  Copyright © 2023 The App Brewery. All rights reserved.
 //
 
 import UIKit
 
 class ResultsViewController: UIViewController {
-
+    
     
     @IBOutlet weak var totalLabel: UILabel!
     var numberOfPeople: String?
     var tipPercentage: String?
-    
+    var settingsLabelText: String {
+        let people = numberOfPeople ?? "2"
+        let tip = tipPercentage ?? "0"
+        return "Split between \(people) people, with \(tip)% tip"
+    }
+    lazy var formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale.current
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 2
+        return formatter
+    }()
     var totalAmount: String?
     @IBOutlet weak var settingsLabel: UILabel!
-  
+    
     
     @IBAction func recalculatePressed(_ sender: UIButton) {
         self.dismiss(animated: true)
@@ -25,11 +36,12 @@ class ResultsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        totalLabel.text = totalAmount
-        settingsLabel.text = "Split between \(numberOfPeople ?? "2") people, with \(tipPercentage ?? "0")% tip "
-
+        if let totalAmount = totalAmount, let total = Double(totalAmount) {
+            totalLabel.text = formatter.string(from: NSNumber(value: total))
+        } else {
+            totalLabel.text = formatter.string(from: 0)
+        };
+        settingsLabel.text = settingsLabelText
+        
     }
-    
-
-
 }
