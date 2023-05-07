@@ -9,6 +9,7 @@ import UIKit
 
 class ResultsViewController: UIViewController {
     
+    @IBOutlet weak var resultView: UIView!
     
     @IBOutlet weak var totalLabel: UILabel!
     var numberOfPeople: String?
@@ -21,11 +22,13 @@ class ResultsViewController: UIViewController {
     lazy var formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.locale = Locale.current
+        formatter.locale = Locale(identifier: "id_ID")
+        formatter.currencyCode = "IDR"
         formatter.maximumFractionDigits = 2
         formatter.minimumFractionDigits = 2
         return formatter
     }()
+
     var totalAmount: String?
     @IBOutlet weak var settingsLabel: UILabel!
     
